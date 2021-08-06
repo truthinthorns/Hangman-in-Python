@@ -1,9 +1,17 @@
 import random
 from os import system
+import sys
 
 def getword():
-    words = ["hamburger","pizza","burrito","salad","fried rice","french fries","shake","noodles","hangman"]
-    return words[random.randint(0,9)]
+    wordFile = open("C:/Users/Desktop/wordList.txt","r")
+    tempwords = wordFile.readlines()
+    listofwords = []
+    for i in range(len(tempwords)):
+        listofwords.append(tempwords[i].strip())
+    word = listofwords[random.randint(0,len(listofwords)-1)]
+    while(len(word) < 3):
+        word = listofwords[random.randint(0,len(listofwords)-1)]
+    return word
 
 def set_guessing_word(word):
     newWord = ""
@@ -131,6 +139,7 @@ def get_positions(letter, word):
     return pos
 
 choice = 0
+
 while(choice!=2):
     print("\nEnter a choice:\n1)Play\n2)Quit")
     choice = int(input())
